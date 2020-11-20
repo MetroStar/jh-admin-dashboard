@@ -9,40 +9,17 @@ admin dashboard codebase.
 - `yarn hot`: Bundles the application and runs a mock (serverless) version on port 8000  
 
 ### Directory Tree 
-<!-- ```
+```
 jh-admin-dashboard
-|   .gitignore
-|   README.md
-|
-|___admin-react-fe
-    |   package.json
-    |   webpack.config.json
-    |   yarn.lock
-    |
-    |___build
-    |   |   admin.fe.js
-    |   |   index.html    
-    |
-    |___src
-        |   App.jsx    
-
-``` -->
-
-.
-+-- _config.yml
-+-- _drafts
-|   +-- begin-with-the-crazy-ideas.textile
-|   +-- on-simplicity-in-technology.markdown
-+-- _includes
-|   +-- footer.html
-|   +-- header.html
-+-- _layouts
-|   +-- default.html
-|   +-- post.html
-+-- _posts
-|   +-- 2007-10-29-why-every-programmer-should-play-nethack.textile
-|   +-- 2009-04-26-barcamp-boston-4-roundup.textile
-+-- _data
-|   +-- members.yml
-+-- _site
-+-- index.html
+    .gitignore
+    README.md
+    admin-react-fe/
+        package.json
+        webpack.config.json
+        yarn.lock
+        build/
+            admin.fe.js
+            index.html    
+        src/
+             App.jsx    
+```
