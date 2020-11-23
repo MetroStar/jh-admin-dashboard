@@ -39,7 +39,7 @@ module.exports = {
         contentBase: path.resolve(__dirname, "build"),
         port: 8000,
         before: (app, server) => {
-            app.use(express.json())
+            // app.use(express.json())
         }
     }
 }
