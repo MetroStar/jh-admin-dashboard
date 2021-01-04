@@ -10,7 +10,7 @@ admin dashboard codebase.
 
 ### Directory Tree 
 ```
-jh-admin-dashboard
+jhadmin/
     .gitignore
     README.md
     admin-react-fe/

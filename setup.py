@@ -5,10 +5,10 @@ from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-exec(open(pjoin(here,'jh-admin-dashboard/version.py')).read()) # Load __version__
+exec(open(pjoin(here,'jhadmin/version.py')).read()) # Load __version__
 
 install_requires = [
-    'tornado>=6.0.4', # Mainly for jhsingle-native-proxy but best to keep consistent
+    'tornado>=6.0.4',
     'traitlets',
     'jupyterhub>=1.0.0',
     'alembic',
@@ -51,10 +51,10 @@ setup_metadata=dict(
 
 # Data files e.g. templates and static js
 
-share_admin_dashboard = pjoin(here, 'share', 'jh-admin-dashboard')
+share_admin_dashboard = pjoin(here, 'share', 'jhadmin')
 
 def get_data_files():
-    """Get data files in share/jh-admin-dashboard"""
+    """Get data files in share/jhadmin"""
 
     data_files = []
     ntrim = len(here + os.path.sep)
@@ -72,7 +72,7 @@ def get_package_data():
 
 
 setup_metadata.update(dict(
-    name='jh_admin_dashboard',
+    name='jhadmin',
     packages=find_packages(),
     package_data=get_package_data(),
     data_files=get_data_files(),

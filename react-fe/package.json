@@ -9,7 +9,7 @@
   "scripts": {
     "build": "yarn && webpack",
     "hot": "webpack && webpack-dev-server",
-    "place": "cp build/admin-react.js ../share/jh-admin-dashboard/static/js"
+    "place": "cp build/admin-react.js ../share/jhadmin/static/js"
   },
   "babel": {
     "presets": [
