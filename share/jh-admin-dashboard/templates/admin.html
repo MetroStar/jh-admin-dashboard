@@ -1,0 +1,22 @@
+{% extends "page.html" %}
+
+{% block main %}
+<div id="admin-react-hook">
+  <!-- React Hook -->
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="container-fluid navbar-default small version_footer">
+  <div class="navbar-text">
+    JupyterHub {{ server_version }}
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script type="text/javascript">
+require(["admin"]);
+</script>
+{% endblock %}

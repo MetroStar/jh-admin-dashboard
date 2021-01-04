@@ -1,0 +1,14 @@
+{% extends "templates/page.html" %}
+
+{% block nav_bar_left_items %}
+{{ super() }}
+
+<li><a href="{{base_url}}react-admin">React-Admin</a></li>
+
+{% endblock %}
+
+{% block stylesheet %}
+<meta http-equiv="Content-Language" content="en">
+{{ super() }}
+
+{% endblock %}

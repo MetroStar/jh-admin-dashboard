@@ -26,10 +26,8 @@ module.exports = {
     },
     output: {
         publicPath: "/",
-        filename: "admin.react.js",
-        path: path.resolve(__dirname, "..", "build"),
-        // ui development
-        // path: path.resolve(__dirname, "build")
+        filename: "admin-react.js",
+        path: path.resolve(__dirname, "build"),
     },
     resolve: {
         extensions: [".css", ".js", ".jsx"]
