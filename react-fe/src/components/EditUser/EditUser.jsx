@@ -18,7 +18,10 @@ class EditUser extends Component {
 
     render() {
 
-        if( this.props.location.state == undefined ) return this.props.history.push("/")
+        if( this.props.location.state == undefined ) {
+            this.props.history.push("/")
+            return <></>
+        }
 
         var {
             username,

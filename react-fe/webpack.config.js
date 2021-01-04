@@ -46,8 +46,9 @@ module.exports = {
             app.get("/hub/api/groups", (req, res) => {
                 res.set("Content-Type", "application/json").send('[{"kind":"group","name":"testgroup","users":[]}, {"kind":"group","name":"testgroup2","users":["foo", "bar"]}]')
             })
-            app.post("/hub/api/groups/*", (req, res) => res.status(200).end())
-            app.delete("/hub/api/groups/*", (req, res) => res.status(200).end())
+            app.post("/hub/api/groups/*", (req, res) => { console.log(req.body); res.status(200).end() })
+            app.delete("/hub/api/groups/*", (req, res) => { console.log(req.body); res.status(200).end() })
+            app.post("/hub/api/users", (req, res) => {console.log(req.body); res.status(200).end() })
         }
     }
 }

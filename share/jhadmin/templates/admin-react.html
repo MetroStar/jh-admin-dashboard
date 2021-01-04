@@ -16,7 +16,8 @@
 
 {% block script %}
 <!-- {{ super() }} -->
-<script type="text/javascript">
-require(["../../static/js/admin-react"]);
-</script>
+<script type="text/javascript" src="{{base_url}}custom-static/js/admin-react.js"></script>
+<!-- <script type="text/javascript">
+  require(["{{base_url}}admin-react-static/js/admin-react.js"]);
+</script> -->
 {% endblock %}

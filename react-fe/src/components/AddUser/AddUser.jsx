@@ -34,13 +34,11 @@ class AddUser extends Component {
                                 <div className="panel-body">
                                     <form>
                                         <div className="form-group">
-                                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="usernames separated by line" onKeyDown={
+                                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="usernames separated by line" onBlur={
                                                 (e) => {
-                                                    if( e.key == "Enter" ) {
-                                                        let split_users = e.target.value.split("\n")
-                                                        console.log(split_users)
-                                                        this.setState(Object.assign({}, this.state, { users: split_users }))
-                                                    }
+                                                    let split_users = e.target.value.split("\n")
+                                                    console.log(split_users)
+                                                    this.setState(Object.assign({}, this.state, { users: split_users }))
                                                 }
                                             }></textarea>     
                                             <br></br>                                       
@@ -64,6 +62,8 @@ class AddUser extends Component {
                                                 let removed_users = this.state.users.filter(e => !(filtered_users.includes(e)))
                                                 alert("Removed " + JSON.stringify(removed_users) + " for either containing special characters or being too short.")
                                             }
+
+                                            console.log(filtered_users, this.state.admin)
 
                                             addUsers(filtered_users, this.state.admin)
                                             .then(data => console.log(data))
