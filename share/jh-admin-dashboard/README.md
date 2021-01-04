@@ -8,3 +8,18 @@ admin dashboard codebase.
 - `yarn build`: Installs all dependencies and bundles the application  
 - `yarn hot`: Bundles the application and runs a mock (serverless) version on port 8000  
 
+### Directory Tree 
+```
+jh-admin-dashboard
+    .gitignore
+    README.md
+    admin-react-fe/
+        package.json
+        webpack.config.json
+        yarn.lock
+        build/
+            admin.fe.js
+            index.html    
+        src/
+             App.jsx    
+```
