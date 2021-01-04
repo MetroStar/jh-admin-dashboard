@@ -3,3 +3,5 @@
 **/yarn-error.log
 **/admin.fe.js
 **/node_modules
+**/jhadmin.egg-info
+**/__pycache__
