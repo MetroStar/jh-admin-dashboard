@@ -14,7 +14,7 @@ export class AddUser extends Component {
     render() {
         var {
             addUsers,
-            userDelimitationEvent,
+            failRegexEvent,
             refreshUserData,
             dispatch
         } = this.props
@@ -55,13 +55,14 @@ export class AddUser extends Component {
                                             if( filtered_users.length < this.state.users.length ) {
                                                 let removed_users = this.state.users.filter(e => !(filtered_users.includes(e)))
                                                 this.setState(Object.assign({}, this.state, { users: filtered_users }))
-                                                userDelimitationEvent()
+                                                failRegexEvent()
                                             }
                                             
                                             addUsers(filtered_users, this.state.admin)
                                             // .then(data => console.log(data))
                                             .then(() => refreshUserData())
                                             .then(() => this.props.history.push("/"))
+                                            .catch(err => {})
                                         }
                                     }>Add Users</button>
                                 </div>

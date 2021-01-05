@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {
-    compose,
-    withProps
-} from 'recompose'
 import { Link } from 'react-router-dom'
-import { jhapiRequest } from '../../util/jhapiUtil'
 
-class EditUser extends Component {
+export class EditUser extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -31,8 +25,8 @@ class EditUser extends Component {
         var {
             editUser,
             deleteUser,
+            failRegexEvent,
             refreshUserData,
-            dispatch
         } = this.props
 
 
@@ -60,14 +54,14 @@ class EditUser extends Component {
                                                 Admin
                                             </label>
                                             <br></br>
-                                            <button className="btn btn-danger btn-sm" onClick={
+                                            <button id="delete-user" className="btn btn-danger btn-sm" onClick={
                                                 () => {
                                                     deleteUser(username)
                                                     .then((data) => {
-                                                        console.log(data)
                                                         this.props.history.push("/")
                                                         refreshUserData()
                                                     })
+                                                    .catch(err => {})
                                                 }
                                             }>Delete user</button>
                                         </div>
@@ -76,22 +70,22 @@ class EditUser extends Component {
                                 <div className="panel-footer">
                                     <button className="btn btn-light"><Link to="/">Back</Link></button>
                                     <span> </span>
-                                    <button className="btn btn-primary" onClick={
+                                    <button id="submit" className="btn btn-primary" onClick={
                                         () => {
                                             let updated_username = this.state.updated_username,
                                                 admin = this.state.admin
 
-                                            console.log(updated_username, admin)
                                             if( updated_username == null && admin == null ) return
                                             if( updated_username.length > 2 && /[!@#$%^&*(),.?":{}|<>]/g.test(updated_username) == false ) {
                                                 editUser(username, updated_username != null ? updated_username : username, admin != null ? admin : has_admin)
                                                 .then((data) => {
-                                                    console.log(data)
                                                     this.props.history.push("/")
                                                     refreshUserData()
                                                 })
+                                                .catch(err => {})
                                             } else {
-                                                alert("Cannot update " + updated_username + " for either containing special characters or being too short.")
+                                                this.setState(Object.assign({}, this.state, { updated_username: "" }))
+                                                failRegexEvent()
                                             }
                                         }
                                     }>Apply</button>
@@ -104,14 +98,3 @@ class EditUser extends Component {
         )
     }
 }
-
-const withUserAPI = withProps( props => ({
-    editUser: (username, updated_username, admin) => jhapiRequest("/users/" + username, "PATCH", { name: updated_username, admin }),
-    deleteUser: username => jhapiRequest("/users/" + username, "DELETE"),
-    refreshUserData: () => jhapiRequest("/users", "GET").then(data => data.json()).then(data => props.dispatch({ type: "USER_DATA", value: data }))
-}))
-
-export default compose(
-    connect(),
-    withUserAPI
-)(EditUser)
