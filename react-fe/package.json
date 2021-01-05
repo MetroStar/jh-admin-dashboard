@@ -9,7 +9,8 @@
   "scripts": {
     "build": "yarn && webpack",
     "hot": "webpack && webpack-dev-server",
-    "place": "rm ../share/jhadmin/static/js/admin-react.js && cp build/admin-react.js ../share/jhadmin/static/js/admin-react.js"
+    "place": "rm ../share/jhadmin/static/js/admin-react.js && cp build/admin-react.js ../share/jhadmin/static/js/admin-react.js",
+    "test": "jest"
   },
   "babel": {
     "presets": [
@@ -20,8 +21,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/preset-react": "^7.12.5",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.1",
     "bootstrap": "^4.5.3",
     "css-loader": "^5.0.1",
@@ -41,5 +42,12 @@
     "webpack": "^5.6.0",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
+    "babel-jest": "^26.6.3",
+    "enzyme": "^3.11.0",
+    "jest": "^26.6.3",
+    "react-test-renderer": "^17.0.1"
   }
 }
