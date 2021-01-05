@@ -24,6 +24,8 @@ export class ServerDashboard extends Component {
             shutdownHub,
             startServer,
             stopServer,
+            startAll,
+            stopAll,
             dispatch
         } = this.props
 
@@ -55,7 +57,36 @@ export class ServerDashboard extends Component {
                                 <td><Button variant="light" className="add-users-button"><Link to="/add-users">Add Users</Link></Button></td>
                                 <td></td>
                                 <td></td>
-                                <td><Button variant="primary">Start All</Button> <Button variant="danger">Stop All</Button></td>
+                                <td>
+                                    <Button variant="primary" onClick={
+                                        () => {
+                                            Promise.all(startAll(user_data.map(e => e.name)))
+                                            .then(res => {
+                                                updateUsers()
+                                                    .then(data => data.json())
+                                                    .then(data => {
+                                                        dispatchUserUpdate(data)
+                                                    })
+                                                return res
+                                            })
+                                            .then(res => console.log(res))
+                                        }
+                                    }>Start All</Button> <span>   </span>
+                                    <Button variant="danger" onClick={
+                                        () => {
+                                            Promise.all(stopAll(user_data.map(e => e.name)))
+                                            .then(res => {
+                                                updateUsers()
+                                                    .then(data => data.json())
+                                                    .then(data => {
+                                                        dispatchUserUpdate(data)
+                                                    })
+                                                return res
+                                            })
+                                            .then(res => console.log(res))
+                                        }
+                                    }>Stop All</Button>
+                                </td>
                                 <td><Button variant="danger" onClick={shutdownHub}>Shutdown Hub</Button></td>
                             </tr>
                             {user_data.map((e, i) => (
