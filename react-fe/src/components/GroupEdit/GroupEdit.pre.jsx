@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { compose, withProps } from 'recompose' 
-
 import { Link } from 'react-router-dom'
 import Multiselect from '../Multiselect/Multiselect'
-import { jhapiRequest } from '../../util/jhapiUtil'
 
-class GroupEdit extends Component {
+export class GroupEdit extends Component {
     constructor(props) {
         super(props)
         this.state = {
             selected: [],
-            changed: false
+            changed: false,
+            added: undefined,
+            removed: undefined
         }
     }
 
@@ -48,9 +46,9 @@ class GroupEdit extends Component {
                             }
                         } />
                         <br></br>
-                        <button className="btn btn-light"><Link to="/groups">Back</Link></button>
+                        <button id="return" className="btn btn-light"><Link to="/groups">Back</Link></button>
                         <span> </span>
-                        <button className="btn btn-primary" onClick={
+                        <button id="submit" className="btn btn-primary" onClick={
                             () => {
                                 // check for changes
                                 if( !this.state.changed ) {
@@ -61,6 +59,7 @@ class GroupEdit extends Component {
                                 let new_users = this.state.selected.filter(e => !(group_data.users.includes(e)))
                                 let removed_users = group_data.users.filter(e => !(this.state.selected.includes(e)))
 
+                                this.setState(Object.assign({}, this.state, { added: new_users, removed: removed_users }))
 
                                 let promiseQueue = []
                                 if( new_users.length > 0 ) promiseQueue.push(addToGroup(new_users, group_data.name))
@@ -80,13 +79,3 @@ class GroupEdit extends Component {
         )
     }
 }
-
-const withGroupsAPI = withProps(props => ({
-    addToGroup: (users, groupname) => jhapiRequest("/groups/" + groupname + "/users", "POST", { users }),
-    removeFromGroup: (users, groupname) => jhapiRequest("/groups/" + groupname + "/users", "DELETE", { users })
-}))
-
-export default compose(
-    connect(),
-    withGroupsAPI
-)(GroupEdit)

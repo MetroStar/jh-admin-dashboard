@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import './add-user.css'
 
 export class AddUser extends Component {
     constructor(props) {
