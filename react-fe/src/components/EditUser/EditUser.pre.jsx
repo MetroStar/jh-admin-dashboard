@@ -61,7 +61,7 @@ export class EditUser extends Component {
                                                         this.props.history.push("/")
                                                         refreshUserData()
                                                     })
-                                                    .catch(err => {})
+                                                    .catch(err => console.log(err))
                                                 }
                                             }>Delete user</button>
                                         </div>

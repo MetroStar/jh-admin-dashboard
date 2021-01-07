@@ -58,10 +58,9 @@ export class AddUser extends Component {
                                             }
                                             
                                             addUsers(filtered_users, this.state.admin)
-                                            // .then(data => console.log(data))
                                             .then(() => refreshUserData())
                                             .then(() => this.props.history.push("/"))
-                                            .catch(err => {})
+                                            .catch(err => console.log(err))
                                         }
                                     }>Add Users</button>
                                 </div>

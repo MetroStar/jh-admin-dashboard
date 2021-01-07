@@ -67,6 +67,7 @@ export class GroupEdit extends Component {
 
                                 Promise.all(promiseQueue)
                                 .then(e => callback())
+                                .catch(err => console.log(err))
 
                                 this.props.history.push("/groups")
                             }

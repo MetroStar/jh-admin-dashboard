@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 import "./server-dashboard.css"
 import { timeSince } from '../../util/timeSince'
 
-import AddUser from '../AddUser/AddUser'
-
 export class ServerDashboard extends Component {
     constructor(props) {
         super(props)
@@ -58,7 +56,8 @@ export class ServerDashboard extends Component {
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <Button variant="primary" onClick={
+                                    {/* Start all servers */}
+                                    <Button variant="primary" className="start-all" onClick={
                                         () => {
                                             Promise.all(startAll(user_data.map(e => e.name)))
                                             .then(res => {
@@ -67,12 +66,15 @@ export class ServerDashboard extends Component {
                                                     .then(data => {
                                                         dispatchUserUpdate(data)
                                                     })
+                                                    .catch(err => console.log(err))
                                                 return res
                                             })
-                                            .then(res => console.log(res))
+                                            .catch(err => console.log(err))
                                         }
-                                    }>Start All</Button> <span>   </span>
-                                    <Button variant="danger" onClick={
+                                    }>Start All</Button> 
+                                    <span>   </span>
+                                    {/* Stop all servers */}
+                                    <Button variant="danger" className="stop-all" onClick={
                                         () => {
                                             Promise.all(stopAll(user_data.map(e => e.name)))
                                             .then(res => {
@@ -81,21 +83,26 @@ export class ServerDashboard extends Component {
                                                     .then(data => {
                                                         dispatchUserUpdate(data)
                                                     })
+                                                    .catch(err => console.log(err))
                                                 return res
                                             })
-                                            .then(res => console.log(res))
+                                            .catch(err => console.log(err))
                                         }
                                     }>Stop All</Button>
                                 </td>
-                                <td><Button variant="danger" onClick={shutdownHub}>Shutdown Hub</Button></td>
+                                <td>
+                                    {/* Shutdown Jupyterhub */}
+                                    <Button variant="danger" className="shutdown-button" onClick={shutdownHub}>Shutdown Hub</Button>
+                                </td>
                             </tr>
                             {user_data.map((e, i) => (
-                                <tr key={i + "row"}>
+                                <tr key={i + "row"} className="user-row">
                                 <td>{e.name}</td>
                                 <td>{e.admin ? "admin" : "" }</td>
                                 <td>{e.last_activity ? timeSince(e.last_activity) : "Never" }</td>
                                 <td>{e.server != null
-                                    ? <button className="btn btn-danger btn-xs" onClick=
+                                    // Stop Single-user server
+                                    ? <button className="btn btn-danger btn-xs stop-button" onClick=
                                         {
                                             () => stopServer(e.name)
                                                     .then(res => {
@@ -106,10 +113,12 @@ export class ServerDashboard extends Component {
                                                             })
                                                         return res
                                                     })
-                                                    .then(res => console.log(res))
+                                                    .catch(err => console.log(err))
                                         }
                                       >Stop Server</button>
-                                    : <button className="btn btn-primary btn-xs" onClick=
+
+                                    // Start Single-user server
+                                    : <button className="btn btn-primary btn-xs start-button" onClick=
                                         {
                                             () => startServer(e.name)
                                                     .then(res => {
@@ -120,11 +129,12 @@ export class ServerDashboard extends Component {
                                                             })
                                                         return res
                                                     })
-                                                    .then(data => console.log(data))
+                                                    .catch(err => console.log(err))
                                         }
                                       >Start Server</button>
                                 }</td>
                                 <td>
+                                    {/* Edit User */}
                                     <button className="btn btn-primary btn-xs" style={{marginRight: 20}} onClick={
                                         () => this.props.history.push({
                                             pathname: "/edit-user",
