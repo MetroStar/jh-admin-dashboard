@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { compose, withProps } from 'recompose'
-import { connect } from 'react-redux'
 import {
     Link
 } from 'react-router-dom'
-import { jhapiRequest } from '../../util/jhapiUtil'
 
-class Groups extends Component {
+export class Groups extends Component {
     constructor(props) {
         super(props)
     }
@@ -15,7 +12,6 @@ class Groups extends Component {
         var {
             user_data,
             groups_data,
-            dispatch,
             refreshGroupsData,
             refreshUserData,
         } = this.props
@@ -31,7 +27,7 @@ class Groups extends Component {
                             <div className="panel-body">
                                 {
                                     groups_data.map((e, i) => 
-                                        <div key={"group-edit" + i}>
+                                        <div key={"group-edit" + i} className="group-edit-link">
                                             <h4><Link to={{
                                                 pathname: "/group-edit",
                                                 state: {
@@ -57,20 +53,3 @@ class Groups extends Component {
         )
     }
 }
-
-const withGroupsAPI = withProps(props => ({
-    refreshGroupsData: () => jhapiRequest("/groups", "GET").then(data => data.json()).then(data => props.dispatch({ type: "GROUPS_DATA", value: data })),
-    refreshUserData: () => jhapiRequest("/users", "GET").then(data => data.json()).then(data => props.dispatch({ type: "USER_DATA", value: data })),
-    addUsersToGroup: (name, new_users) => jhapiRequest("/groups/" + name + "/users", "POST", { body: { users: new_users }, json: true }),
-    removeUsersFromGroup: (name, removed_users) => jhapiRequest("/groups/" + name + "/users", "DELETE", { body: { users: removed_users }, json: true })
-}))
-
-export default compose(
-    connect(
-        state => ({ 
-            user_data: state.user_data,
-            groups_data: state.groups_data
-        })
-    ),
-    withGroupsAPI
-)(Groups)
