@@ -14,3 +14,15 @@
 .server-dashboard-container tbody {
     color: #626262;
 }
+
+.admin-table-head {
+    user-select: none;
+}
+
+.sort-icon {
+    display: inline-block;
+    top: .125em;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+}

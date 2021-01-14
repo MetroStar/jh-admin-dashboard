@@ -6,12 +6,22 @@ import {
 import { Link } from 'react-router-dom'
 import "./server-dashboard.css"
 import { timeSince } from '../../util/timeSince'
+import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa'
 
 export class ServerDashboard extends Component {
     constructor(props) {
         super(props)
+
+        this.usernameDesc = e => e.sort((a, b) => a.name < b.name ? 1 : -1),
+        this.usernameAsc = e => e.sort((a, b) => a.name > b.name ? 1 : -1),
+        this.adminDesc = e => e.sort(a => a.admin ? 1 : -1),
+        this.adminAsc = e => e.sort(a => a.admin ? -1 : 1),
+        this.dateDesc = e => e.sort((a, b) => new Date(a.last_activity) - new Date(b.last_activity) > 0 ? -1 : 1 ),
+        this.dateAsc = e => e.sort((a, b) => new Date(a.last_activity) - new Date(b.last_activity) > 0 ? 1 : -1 )
+
         this.state = {
-            "addUser": false
+            addUser: false,
+            sortMethod: undefined
         }
     }
 
@@ -36,17 +46,20 @@ export class ServerDashboard extends Component {
 
         if( !user_data ) return <div></div>
 
+        if(this.state.sortMethod != undefined)
+            user_data = this.state.sortMethod(user_data)
+
         return (
             <div>
                 <div className="manage-groups" style={{float: "right", margin: "20px"}}><Link to="/groups">{"> Manage Groups"}</Link></div>
                 <div className="server-dashboard-container">
                     <table className="table table-striped table-bordered table-hover">
-                        <thead>
+                        <thead className="admin-table-head">
                             <tr>
-                            <th>User</th>
-                            <th>Admin</th>
-                            <th>Last Activity</th>
-                            <th>Running</th>
+                            <th>User <SortHandler sorts={{ asc: this.usernameAsc, desc: this.usernameDesc }} callback={(e) => this.setState(Object.assign({}, this.state, { sortMethod: e }))} /></th>
+                            <th>Admin <SortHandler sorts={{ asc: this.adminAsc, desc: this.adminDesc }} callback={(e) => this.setState(Object.assign({}, this.state, { sortMethod: e }))} /></th>
+                            <th>Last Activity <SortHandler sorts={{ asc: this.dateAsc, desc: this.dateDesc }} callback={(e) => this.setState(Object.assign({}, this.state, { sortMethod: e }))} /></th>
+                            <th>Running </th>
                             <th>Actions</th>
                             </tr>
                         </thead>
@@ -150,6 +163,43 @@ export class ServerDashboard extends Component {
                         </tbody>
                     </table>
                 </div>
+            </div>
+        )
+    }
+}
+
+class SortHandler extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            direction: undefined
+        }
+    }
+
+    render() {
+        let {
+            sorts,
+            callback
+        } = this.props;
+
+        return (
+            <div className="sort-icon" onClick={
+                () => {
+                    if( !this.state.direction ) {
+                        callback(sorts.desc)
+                        this.setState({ direction: "desc" })
+                    } else if( this.state.direction == "asc" ) {
+                        callback(sorts.desc)
+                        this.setState({ direction: "desc" })
+                    } else {
+                        callback(sorts.asc)
+                        this.setState({ direction: "asc" })
+                    }
+                }
+            }>
+                {
+                    !this.state.direction ? <FaSort /> : (this.state.direction == "asc" ? <FaSortDown /> : <FaSortUp />)
+                }
             </div>
         )
     }
