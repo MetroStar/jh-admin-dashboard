@@ -13,6 +13,8 @@ First, `cp react-fe` then:
 - `yarn hot`: Bundles the application and runs a mock (serverless) version on port 8000  
 - `yarn place`: Copies bundle into the hubextension's static javascript directory
 - `yarn test`: Runs Jest/Enzyme unit tests on all the presentational components
+- `yarn lint`: Lints the Javascript src directory with eslint and prettier
+- `{ yarn lint:fix || yarn lint --fix }`: Lints the Javascript src directory, fixing any possible issues
 
 ### Build Commands (pip package)  
 - `pip install -e .`: Installs the package locally, directly from the source, for development  
