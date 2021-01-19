@@ -10,15 +10,17 @@
         }
     },
     "plugins": [
-        "eslint-plugin-react"
+        "eslint-plugin-react",
+        "prettier"
     ],
     "env": {
         "es6": true,
         "browser": true
     },
     "rules": {
-        "semi": ["off"],
-        "quotes": ["error", "single"]
+        "semi": "off",
+        "quotes": "off",
+        "prettier/prettier": "warn"
     },
     "overrides": [
         {
