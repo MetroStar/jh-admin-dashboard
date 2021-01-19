@@ -2,8 +2,18 @@ import React, { Component } from 'react'
 import {
     Link
 } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export class Groups extends Component {
+    static get propTypes() {
+        return {
+            user_data: PropTypes.object,
+            groups_data: PropTypes.object,
+            refreshUserData: PropTypes.func,
+            refreshGroupsData: PropTypes.func
+        }
+    }
+
     constructor(props) {
         super(props)
     }
@@ -27,9 +37,9 @@ export class Groups extends Component {
                             <div className="panel-body">
                                 {
                                     groups_data.map((e, i) => 
-                                        <div key={"group-edit" + i} className="group-edit-link">
+                                        <div key={'group-edit' + i} className="group-edit-link">
                                             <h4><Link to={{
-                                                pathname: "/group-edit",
+                                                pathname: '/group-edit',
                                                 state: {
                                                     group_data: e,
                                                     user_data: user_data,

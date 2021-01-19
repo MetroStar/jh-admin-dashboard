@@ -1,7 +1,26 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export class EditUser extends Component {
+    static get propTypes() {
+        return {
+            location: {
+                state: {
+                    username: PropTypes.string,
+                    has_admin: PropTypes.bool
+                }
+            },
+            history: {
+                push: PropTypes.func
+            },
+            editUser: PropTypes.func,
+            deleteUser: PropTypes.func,
+            failRegexEvent: PropTypes.func,
+            refreshUserData: PropTypes.func
+        }
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -13,7 +32,7 @@ export class EditUser extends Component {
     render() {
 
         if( this.props.location.state == undefined ) {
-            this.props.history.push("/")
+            this.props.history.push('/')
             return <></>
         }
 
@@ -58,7 +77,7 @@ export class EditUser extends Component {
                                                 () => {
                                                     deleteUser(username)
                                                     .then((data) => {
-                                                        this.props.history.push("/")
+                                                        this.props.history.push('/')
                                                         refreshUserData()
                                                     })
                                                     .catch(err => console.log(err))
@@ -79,12 +98,12 @@ export class EditUser extends Component {
                                             if( updated_username.length > 2 && /[!@#$%^&*(),.?":{}|<>]/g.test(updated_username) == false ) {
                                                 editUser(username, updated_username != null ? updated_username : username, admin != null ? admin : has_admin)
                                                 .then((data) => {
-                                                    this.props.history.push("/")
+                                                    this.props.history.push('/')
                                                     refreshUserData()
                                                 })
                                                 .catch(err => {})
                                             } else {
-                                                this.setState(Object.assign({}, this.state, { updated_username: "" }))
+                                                this.setState(Object.assign({}, this.state, { updated_username: '' }))
                                                 failRegexEvent()
                                             }
                                         }

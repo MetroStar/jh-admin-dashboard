@@ -4,10 +4,10 @@ import { jhapiRequest } from '../../util/jhapiUtil'
 import { Groups } from './Groups.pre'
 
 const withGroupsAPI = withProps(props => ({
-    refreshGroupsData: () => jhapiRequest("/groups", "GET").then(data => data.json()).then(data => props.dispatch({ type: "GROUPS_DATA", value: data })),
-    refreshUserData: () => jhapiRequest("/users", "GET").then(data => data.json()).then(data => props.dispatch({ type: "USER_DATA", value: data })),
-    addUsersToGroup: (name, new_users) => jhapiRequest("/groups/" + name + "/users", "POST", { body: { users: new_users }, json: true }),
-    removeUsersFromGroup: (name, removed_users) => jhapiRequest("/groups/" + name + "/users", "DELETE", { body: { users: removed_users }, json: true })
+    refreshGroupsData: () => jhapiRequest('/groups', 'GET').then(data => data.json()).then(data => props.dispatch({ type: 'GROUPS_DATA', value: data })),
+    refreshUserData: () => jhapiRequest('/users', 'GET').then(data => data.json()).then(data => props.dispatch({ type: 'USER_DATA', value: data })),
+    addUsersToGroup: (name, new_users) => jhapiRequest('/groups/' + name + '/users', 'POST', { body: { users: new_users }, json: true }),
+    removeUsersFromGroup: (name, removed_users) => jhapiRequest('/groups/' + name + '/users', 'DELETE', { body: { users: removed_users }, json: true })
 }))
 
 export default compose(

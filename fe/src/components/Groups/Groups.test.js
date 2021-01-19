@@ -5,7 +5,7 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("Groups Component: ", () => {
+describe('Groups Component: ', () => {
 
     var groupsJsx = () => 
         <Groups 
@@ -13,14 +13,14 @@ describe("Groups Component: ", () => {
             groups_data={JSON.parse('[{"kind":"group","name":"testgroup","users":[]}, {"kind":"group","name":"testgroup2","users":["foo", "bar"]}]')}
         />
 
-    it("Renders groups_data prop into links", () => {
+    it('Renders groups_data prop into links', () => {
         let component = shallow(groupsJsx()),
-            links = component.find(".group-edit-link")
+            links = component.find('.group-edit-link')
         expect(links.length).toBe(2)
     })
 
-    it("Renders nothing if required data is not available", () => {
+    it('Renders nothing if required data is not available', () => {
         let component = shallow(<Groups />)
-        expect(component.html()).toBe("<div></div>")
+        expect(component.html()).toBe('<div></div>')
     })
 })

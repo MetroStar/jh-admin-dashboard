@@ -1,7 +1,20 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export class AddUser extends Component {
+    static get propTypes() {
+        return {
+            addUsers: PropTypes.func,
+            failRegexEvent: PropTypes.func,
+            refreshUserData: PropTypes.func,
+            dispatch: PropTypes.func,
+            history: {
+                push: PropTypes.func
+            }
+        }
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -30,7 +43,7 @@ export class AddUser extends Component {
                                         <div className="form-group">
                                             <textarea className="form-control" id="add-user-textarea" rows="3" placeholder="usernames separated by line" onBlur={
                                                 (e) => {
-                                                    let split_users = e.target.value.split("\n")
+                                                    let split_users = e.target.value.split('\n')
                                                     this.setState(Object.assign({}, this.state, { users: split_users }))
                                                 }
                                             }></textarea>     
@@ -59,7 +72,7 @@ export class AddUser extends Component {
                                             
                                             addUsers(filtered_users, this.state.admin)
                                             .then(() => refreshUserData())
-                                            .then(() => this.props.history.push("/"))
+                                            .then(() => this.props.history.push('/'))
                                             .catch(err => console.log(err))
                                         }
                                     }>Add Users</button>

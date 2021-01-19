@@ -4,11 +4,29 @@ import {
     Button
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import "./server-dashboard.css"
+import './server-dashboard.css'
 import { timeSince } from '../../util/timeSince'
 import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa'
+import PropTypes from 'prop-types'
 
 export class ServerDashboard extends Component {
+    static get propTypes() {
+        return {
+            user_data: PropTypes.object,
+            updateUsers: PropTypes.func,
+            shutdownHub: PropTypes.func,
+            startServer: PropTypes.func,
+            stopServer: PropTypes.func,
+            startAll: PropTypes.func,
+            stopAll: PropTypes.func,
+            dispatch: PropTypes.func,
+            history: {
+                push: PropTypes.func
+            },
+
+        }
+    }
+
     constructor(props) {
         super(props)
 
@@ -39,7 +57,7 @@ export class ServerDashboard extends Component {
 
         var dispatchUserUpdate = data => {
             dispatch({
-                type: "USER_DATA",
+                type: 'USER_DATA',
                 value: data
             })
         }
@@ -51,7 +69,7 @@ export class ServerDashboard extends Component {
 
         return (
             <div>
-                <div className="manage-groups" style={{float: "right", margin: "20px"}}><Link to="/groups">{"> Manage Groups"}</Link></div>
+                <div className="manage-groups" style={{float: 'right', margin: '20px'}}><Link to="/groups">{'> Manage Groups'}</Link></div>
                 <div className="server-dashboard-container">
                     <table className="table table-striped table-bordered table-hover">
                         <thead className="admin-table-head">
@@ -109,10 +127,10 @@ export class ServerDashboard extends Component {
                                 </td>
                             </tr>
                             {user_data.map((e, i) => (
-                                <tr key={i + "row"} className="user-row">
+                                <tr key={i + 'row'} className="user-row">
                                 <td>{e.name}</td>
-                                <td>{e.admin ? "admin" : "" }</td>
-                                <td>{e.last_activity ? timeSince(e.last_activity) : "Never" }</td>
+                                <td>{e.admin ? 'admin' : '' }</td>
+                                <td>{e.last_activity ? timeSince(e.last_activity) : 'Never' }</td>
                                 <td>{e.server != null
                                     // Stop Single-user server
                                     ? <button className="btn btn-danger btn-xs stop-button" onClick=
@@ -150,7 +168,7 @@ export class ServerDashboard extends Component {
                                     {/* Edit User */}
                                     <button className="btn btn-primary btn-xs" style={{marginRight: 20}} onClick={
                                         () => this.props.history.push({
-                                            pathname: "/edit-user",
+                                            pathname: '/edit-user',
                                             state: {
                                                 username: e.name,
                                                 has_admin: e.admin
@@ -169,6 +187,13 @@ export class ServerDashboard extends Component {
 }
 
 class SortHandler extends Component {
+    static get propTypes() {
+        return {
+            sorts: PropTypes.object,
+            callback: PropTypes.func
+        }
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -187,18 +212,18 @@ class SortHandler extends Component {
                 () => {
                     if( !this.state.direction ) {
                         callback(sorts.desc)
-                        this.setState({ direction: "desc" })
-                    } else if( this.state.direction == "asc" ) {
+                        this.setState({ direction: 'desc' })
+                    } else if( this.state.direction == 'asc' ) {
                         callback(sorts.desc)
-                        this.setState({ direction: "desc" })
+                        this.setState({ direction: 'desc' })
                     } else {
                         callback(sorts.asc)
-                        this.setState({ direction: "asc" })
+                        this.setState({ direction: 'asc' })
                     }
                 }
             }>
                 {
-                    !this.state.direction ? <FaSort /> : (this.state.direction == "asc" ? <FaSortDown /> : <FaSortUp />)
+                    !this.state.direction ? <FaSort /> : (this.state.direction == 'asc' ? <FaSortDown /> : <FaSortUp />)
                 }
             </div>
         )

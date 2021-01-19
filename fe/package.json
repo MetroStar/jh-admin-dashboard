@@ -10,7 +10,9 @@
     "build": "yarn && webpack",
     "hot": "webpack && webpack-dev-server",
     "place": "rm ../share/jhadmin/static/js/admin-react.js && cp build/admin-react.js ../share/jhadmin/static/js/admin-react.js",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ext .jsx --ext .js src/",
+    "lint:fix": "eslint --ext .jsx --ext .js src/ --fix"
   },
   "babel": {
     "presets": [
@@ -34,6 +36,7 @@
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
     "history": "^5.0.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
@@ -53,6 +56,8 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
     "babel-jest": "^26.6.3",
     "enzyme": "^3.11.0",
+    "eslint": "^7.18.0",
+    "eslint-plugin-react": "^7.22.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "react-test-renderer": "^17.0.1"

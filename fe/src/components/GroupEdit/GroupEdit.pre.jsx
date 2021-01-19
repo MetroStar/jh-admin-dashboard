@@ -1,8 +1,26 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Multiselect from '../Multiselect/Multiselect'
+import PropTypes from 'prop-types'
 
 export class GroupEdit extends Component {
+    static get propTypes() {
+        return {
+            location: {
+                state: {
+                    group_data: PropTypes.object,
+                    user_data: PropTypes.object,
+                    callback: PropTypes.func
+                }
+            },
+            history: {
+                push: PropTypes.func
+            },
+            addToGroup: PropTypes.func,
+            removeFromGroup: PropTypes.func
+        }
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -16,7 +34,7 @@ export class GroupEdit extends Component {
     render() {
 
         if( !(this.props.location.state) ) {
-            this.props.history.push("/groups")
+            this.props.history.push('/groups')
             return <></>
         }
 
@@ -52,7 +70,7 @@ export class GroupEdit extends Component {
                             () => {
                                 // check for changes
                                 if( !this.state.changed ) {
-                                    this.props.history.push("/groups")
+                                    this.props.history.push('/groups')
                                     return
                                 } 
 
@@ -69,7 +87,7 @@ export class GroupEdit extends Component {
                                 .then(e => callback())
                                 .catch(err => console.log(err))
 
-                                this.props.history.push("/groups")
+                                this.props.history.push('/groups')
                             }
                         }>Apply</button>
                         <br></br>

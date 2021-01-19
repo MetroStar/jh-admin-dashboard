@@ -5,44 +5,44 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("Multiselect Component: ", () => {
+describe('Multiselect Component: ', () => {
 
     var multiselectJsx = () => 
         <Multiselect
-            options={["foo", "bar", "wombat"]}
-            value={["wombat"]}
+            options={['foo', 'bar', 'wombat']}
+            value={['wombat']}
             onChange={() => {}}
         />
 
-    it("Renders with initial value selected", () => {
+    it('Renders with initial value selected', () => {
         let component = shallow(multiselectJsx()),
-            selected = component.state("selected")
-        expect(selected.length == 1 && selected[0] == "wombat").toBe(true)
+            selected = component.state('selected')
+        expect(selected.length == 1 && selected[0] == 'wombat').toBe(true)
     })
 
-    it("Deselects a value when div.item.selected is clicked", () => {
+    it('Deselects a value when div.item.selected is clicked', () => {
         let component = shallow(multiselectJsx()),
-            selected = component.find(".item.selected").first()
-        selected.simulate("click")
-        expect(component.state("selected").length).toBe(0)
+            selected = component.find('.item.selected').first()
+        selected.simulate('click')
+        expect(component.state('selected').length).toBe(0)
     })
 
-    it("Selects a an option when div.item.unselected is clicked", () => {
+    it('Selects a an option when div.item.unselected is clicked', () => {
         let component = shallow(multiselectJsx()),
-            unselected = component.find(".item.unselected").first()
-        unselected.simulate("click")
-        expect(component.state("selected").length).toBe(2)
+            unselected = component.find('.item.unselected').first()
+        unselected.simulate('click')
+        expect(component.state('selected').length).toBe(2)
     })
 
-    it("Triggers callback on any sort of change", () => {
+    it('Triggers callback on any sort of change', () => {
         let callbackSpy = jest.fn(),
             component = shallow( <Multiselect
-                options={["foo", "bar", "wombat"]}
-                value={["wombat"]}
+                options={['foo', 'bar', 'wombat']}
+                value={['wombat']}
                 onChange={callbackSpy}
             />),
-            selected = component.find(".item.selected").first()
-        selected.simulate("click")
+            selected = component.find('.item.selected').first()
+        selected.simulate('click')
         expect(callbackSpy).toHaveBeenCalled()
     })
 })

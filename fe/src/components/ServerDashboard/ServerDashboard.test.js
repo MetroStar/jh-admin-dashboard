@@ -5,7 +5,7 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("ServerDashboard Component: ", () => {
+describe('ServerDashboard Component: ', () => {
 
     var serverDashboardJsx = (callbackSpy) => 
         <ServerDashboard
@@ -19,51 +19,51 @@ describe("ServerDashboard Component: ", () => {
             dispatch={callbackSpy}
         />
 
-    var mockAsync = () => jest.fn().mockImplementation(() => Promise.resolve({ json: () => Promise.resolve({"k": "v"}) }))
+    var mockAsync = () => jest.fn().mockImplementation(() => Promise.resolve({ json: () => Promise.resolve({'k': 'v'}) }))
 
-    it("Renders users from props.user_data into table", () => {
+    it('Renders users from props.user_data into table', () => {
         let component = shallow(serverDashboardJsx(jest.fn())),
-            userRows = component.find(".user-row")
+            userRows = component.find('.user-row')
         expect(userRows.length).toBe(2)
     })
 
-    it("Renders correctly the status of a single-user server", () => {
+    it('Renders correctly the status of a single-user server', () => {
         let component = shallow(serverDashboardJsx(jest.fn())),
-            userRows = component.find(".user-row")
+            userRows = component.find('.user-row')
         // Renders .stop-button when server is started   
         // Should be 1 since user foo is started    
-        expect(userRows.at(0).find(".stop-button").length).toBe(1)
+        expect(userRows.at(0).find('.stop-button').length).toBe(1)
         // Renders .start-button when server is stopped 
         // Should be 1 since user bar is stopped
-        expect(userRows.at(1).find(".start-button").length).toBe(1)
+        expect(userRows.at(1).find('.start-button').length).toBe(1)
     })
 
-    it("Invokes the startServer event on button click", () => {
+    it('Invokes the startServer event on button click', () => {
         let callbackSpy = mockAsync(),
             component = shallow(serverDashboardJsx(callbackSpy)),
-            startBtn = component.find(".start-button")
-        startBtn.simulate("click")
+            startBtn = component.find('.start-button')
+        startBtn.simulate('click')
         expect(callbackSpy).toHaveBeenCalled()
     })
 
-    it("Invokes the stopServer event on button click", () => {
+    it('Invokes the stopServer event on button click', () => {
         let callbackSpy = mockAsync(),
             component = shallow(serverDashboardJsx(callbackSpy)),
-            stopBtn = component.find(".stop-button")
-        stopBtn.simulate("click")
+            stopBtn = component.find('.stop-button')
+        stopBtn.simulate('click')
         expect(callbackSpy).toHaveBeenCalled()
     })
 
-    it("Invokes the shutdownHub event on button click", () => {
+    it('Invokes the shutdownHub event on button click', () => {
         let callbackSpy = mockAsync(),
             component = shallow(serverDashboardJsx(callbackSpy)),
-            shutdownBtn = component.find(".shutdown-button")
-        shutdownBtn.simulate("click")
+            shutdownBtn = component.find('.shutdown-button')
+        shutdownBtn.simulate('click')
         expect(callbackSpy).toHaveBeenCalled()
     })
 
-    it("Renders nothing if required data is not available", () => {
+    it('Renders nothing if required data is not available', () => {
         let component = shallow(<ServerDashboard />)
-        expect(component.html()).toBe("<div></div>")
+        expect(component.html()).toBe('<div></div>')
     })
 })

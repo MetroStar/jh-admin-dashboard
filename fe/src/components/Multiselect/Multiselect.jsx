@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
 import './multi-select.css'
+import PropTypes from 'prop-types'
 
 export default class Multiselect extends Component {
+    static get propTypes() {
+        return {
+            value: PropTypes.object,
+            onChange: PropTypes.func,
+            options: PropTypes.object
+        }
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -23,7 +32,7 @@ export default class Multiselect extends Component {
                 <div>
                     { 
                         this.state.selected.map((e, i) => 
-                            <div key={"selected" + i} className="item selected" onClick={
+                            <div key={'selected' + i} className="item selected" onClick={
                                 () => {
                                     let updated_selection = this.state.selected.slice(0, i).concat(this.state.selected.slice(i + 1))
                                     onChange(updated_selection, options)
@@ -38,7 +47,7 @@ export default class Multiselect extends Component {
                             ?
                             undefined
                             :
-                            <div key={"unselected" + i} className="item unselected" onClick={
+                            <div key={'unselected' + i} className="item unselected" onClick={
                                 () => {
                                     let updated_selection = this.state.selected.concat([e])
                                     onChange(updated_selection, options)
