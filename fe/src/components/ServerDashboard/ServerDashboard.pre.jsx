@@ -25,7 +25,7 @@ export class ServerDashboard extends Component {
 
   constructor(props) {
     super(props);
-    
+
     (this.usernameDesc = (e) => e.sort((a, b) => (a.name > b.name ? 1 : -1))),
       (this.usernameAsc = (e) => e.sort((a, b) => (a.name < b.name ? 1 : -1))),
       (this.adminDesc = (e) => e.sort((a) => (a.admin ? -1 : 1))),

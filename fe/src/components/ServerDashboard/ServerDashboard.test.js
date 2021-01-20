@@ -90,39 +90,45 @@ describe("ServerDashboard Component: ", () => {
   });
 
   it("Sorts according to username", () => {
-    let component = mount(deepServerDashboardJsx(jest.fn())).find("ServerDashboard"),
-      handler = component.find("SortHandler").first()
-    handler.simulate("click")
+    let component = mount(deepServerDashboardJsx(jest.fn())).find(
+        "ServerDashboard"
+      ),
+      handler = component.find("SortHandler").first();
+    handler.simulate("click");
     let first = component.find(".user-row").first();
     expect(first.html().includes("bar")).toBe(true);
-    handler.simulate("click")
+    handler.simulate("click");
     first = component.find(".user-row").first();
     expect(first.html().includes("foo")).toBe(true);
-  })
+  });
 
   it("Sorts according to admin", () => {
-    let component = mount(deepServerDashboardJsx(jest.fn())).find("ServerDashboard"),
-      handler = component.find("SortHandler").at(1)
-    handler.simulate("click")
+    let component = mount(deepServerDashboardJsx(jest.fn())).find(
+        "ServerDashboard"
+      ),
+      handler = component.find("SortHandler").at(1);
+    handler.simulate("click");
     let first = component.find(".user-row").first();
     expect(first.html().includes("admin")).toBe(true);
-    handler.simulate("click")
+    handler.simulate("click");
     first = component.find(".user-row").first();
     expect(first.html().includes("admin")).toBe(false);
-  })
+  });
 
   it("Sorts according to last activity", () => {
-    let component = mount(deepServerDashboardJsx(jest.fn())).find("ServerDashboard"),
+    let component = mount(deepServerDashboardJsx(jest.fn())).find(
+        "ServerDashboard"
+      ),
       handler = component.find("SortHandler").at(2);
-    handler.simulate("click")
+    handler.simulate("click");
     let first = component.find(".user-row").first();
     // foo used most recently
     expect(first.html().includes("foo")).toBe(true);
-    handler.simulate("click")
+    handler.simulate("click");
     first = component.find(".user-row").first();
     // bar used least recently
     expect(first.html().includes("bar")).toBe(true);
-  })
+  });
 
   it("Renders nothing if required data is not available", () => {
     let component = shallow(<ServerDashboard />);
