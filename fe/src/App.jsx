@@ -37,9 +37,6 @@ class App extends Component {
       <div className="resets">
         <Provider store={store}>
           <HashRouter>
-            {/* <Button variant="link" style={{ float: "right" }} onClick={
-                                () => routerHistory.push("/groups")
-                        }>{"> Manage Groups"}</Button> */}
             <Switch>
               <Route exact path="/" component={ServerDashboard} />
               <Route exact path="/groups" component={Groups} />

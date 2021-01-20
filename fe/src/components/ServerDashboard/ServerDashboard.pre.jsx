@@ -25,11 +25,11 @@ export class ServerDashboard extends Component {
 
   constructor(props) {
     super(props);
-
-    (this.usernameDesc = (e) => e.sort((a, b) => (a.name < b.name ? 1 : -1))),
-      (this.usernameAsc = (e) => e.sort((a, b) => (a.name > b.name ? 1 : -1))),
-      (this.adminDesc = (e) => e.sort((a) => (a.admin ? 1 : -1))),
-      (this.adminAsc = (e) => e.sort((a) => (a.admin ? -1 : 1))),
+    
+    (this.usernameDesc = (e) => e.sort((a, b) => (a.name > b.name ? 1 : -1))),
+      (this.usernameAsc = (e) => e.sort((a, b) => (a.name < b.name ? 1 : -1))),
+      (this.adminDesc = (e) => e.sort((a) => (a.admin ? -1 : 1))),
+      (this.adminAsc = (e) => e.sort((a) => (a.admin ? 1 : -1))),
       (this.dateDesc = (e) =>
         e.sort((a, b) =>
           new Date(a.last_activity) - new Date(b.last_activity) > 0 ? -1 : 1
@@ -81,7 +81,7 @@ export class ServerDashboard extends Component {
           <table className="table table-striped table-bordered table-hover">
             <thead className="admin-table-head">
               <tr>
-                <th>
+                <th id="user-header">
                   User{" "}
                   <SortHandler
                     sorts={{ asc: this.usernameAsc, desc: this.usernameDesc }}
@@ -92,7 +92,7 @@ export class ServerDashboard extends Component {
                     }
                   />
                 </th>
-                <th>
+                <th id="admin-header">
                   Admin{" "}
                   <SortHandler
                     sorts={{ asc: this.adminAsc, desc: this.adminDesc }}
@@ -103,7 +103,7 @@ export class ServerDashboard extends Component {
                     }
                   />
                 </th>
-                <th>
+                <th id="last-activity-header">
                   Last Activity{" "}
                   <SortHandler
                     sorts={{ asc: this.dateAsc, desc: this.dateDesc }}
@@ -114,8 +114,8 @@ export class ServerDashboard extends Component {
                     }
                   />
                 </th>
-                <th>Running </th>
-                <th>Actions</th>
+                <th id="running-status-header">Running </th>
+                <th id="actions-header">Actions</th>
               </tr>
             </thead>
             <tbody>
