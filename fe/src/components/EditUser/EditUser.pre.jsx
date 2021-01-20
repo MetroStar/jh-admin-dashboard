@@ -5,15 +5,15 @@ import PropTypes from "prop-types";
 export class EditUser extends Component {
   static get propTypes() {
     return {
-      location: {
-        state: {
+      location: PropTypes.shape({
+        state: PropTypes.shape({
           username: PropTypes.string,
           has_admin: PropTypes.bool,
-        },
-      },
-      history: {
+        }),
+      }),
+      history: PropTypes.shape({
         push: PropTypes.func,
-      },
+      }),
       editUser: PropTypes.func,
       deleteUser: PropTypes.func,
       failRegexEvent: PropTypes.func,

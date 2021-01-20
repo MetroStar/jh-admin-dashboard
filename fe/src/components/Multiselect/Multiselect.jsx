@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 export default class Multiselect extends Component {
   static get propTypes() {
     return {
-      value: PropTypes.object,
+      value: PropTypes.array,
       onChange: PropTypes.func,
-      options: PropTypes.object,
+      options: PropTypes.array,
     };
   }
 

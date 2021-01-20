@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 export class ServerDashboard extends Component {
   static get propTypes() {
     return {
-      user_data: PropTypes.object,
+      user_data: PropTypes.array,
       updateUsers: PropTypes.func,
       shutdownHub: PropTypes.func,
       startServer: PropTypes.func,
@@ -17,9 +17,9 @@ export class ServerDashboard extends Component {
       startAll: PropTypes.func,
       stopAll: PropTypes.func,
       dispatch: PropTypes.func,
-      history: {
+      history: PropTypes.shape({
         push: PropTypes.func,
-      },
+      }),
     };
   }
 

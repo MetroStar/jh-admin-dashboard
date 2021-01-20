@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 export class Groups extends Component {
   static get propTypes() {
     return {
-      user_data: PropTypes.object,
-      groups_data: PropTypes.object,
+      user_data: PropTypes.array,
+      groups_data: PropTypes.array,
       refreshUserData: PropTypes.func,
       refreshGroupsData: PropTypes.func,
     };

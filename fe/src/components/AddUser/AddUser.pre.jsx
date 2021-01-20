@@ -9,9 +9,9 @@ export class AddUser extends Component {
       failRegexEvent: PropTypes.func,
       refreshUserData: PropTypes.func,
       dispatch: PropTypes.func,
-      history: {
+      history: PropTypes.shape({
         push: PropTypes.func,
-      },
+      }),
     };
   }
 

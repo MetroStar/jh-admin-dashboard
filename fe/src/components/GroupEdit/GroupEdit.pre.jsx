@@ -6,16 +6,16 @@ import PropTypes from "prop-types";
 export class GroupEdit extends Component {
   static get propTypes() {
     return {
-      location: {
-        state: {
+      location: PropTypes.shape({
+        state: PropTypes.shape({
           group_data: PropTypes.object,
-          user_data: PropTypes.object,
+          user_data: PropTypes.array,
           callback: PropTypes.func,
-        },
-      },
-      history: {
+        }),
+      }),
+      history: PropTypes.shape({
         push: PropTypes.func,
-      },
+      }),
       addToGroup: PropTypes.func,
       removeFromGroup: PropTypes.func,
     };
