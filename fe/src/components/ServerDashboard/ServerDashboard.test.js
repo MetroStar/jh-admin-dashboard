@@ -126,7 +126,22 @@ describe("ServerDashboard Component: ", () => {
     expect(first.html().includes("foo")).toBe(true);
     handler.simulate("click");
     first = component.find(".user-row").first();
-    // bar used least recently
+    // invert sort - bar used least recently
+    expect(first.html().includes("bar")).toBe(true);
+  });
+
+  it("Sorts according to server status (running/not running)", () => {
+    let component = mount(deepServerDashboardJsx(jest.fn())).find(
+        "ServerDashboard"
+      ),
+      handler = component.find("SortHandler").at(3);
+    handler.simulate("click");
+    let first = component.find(".user-row").first();
+    // foo running
+    expect(first.html().includes("foo")).toBe(true);
+    handler.simulate("click");
+    first = component.find(".user-row").first();
+    // invert sort - bar not running
     expect(first.html().includes("bar")).toBe(true);
   });
 

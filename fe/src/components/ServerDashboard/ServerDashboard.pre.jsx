@@ -37,7 +37,9 @@ export class ServerDashboard extends Component {
       (this.dateAsc = (e) =>
         e.sort((a, b) =>
           new Date(a.last_activity) - new Date(b.last_activity) > 0 ? 1 : -1
-        ));
+        )),
+      (this.runningAsc = (e) => e.sort((a) => (a.server == null ? -1 : 1))),
+      (this.runningDesc = (e) => e.sort((a) => (a.server == null ? 1 : -1)));
 
     this.state = {
       addUser: false,
@@ -114,7 +116,17 @@ export class ServerDashboard extends Component {
                     }
                   />
                 </th>
-                <th id="running-status-header">Running </th>
+                <th id="running-status-header">
+                  Running{" "}
+                  <SortHandler
+                    sorts={{ asc: this.runningAsc, desc: this.runningDesc }}
+                    callback={(e) =>
+                      this.setState(
+                        Object.assign({}, this.state, { sortMethod: e })
+                      )
+                    }
+                  />
+                </th>
                 <th id="actions-header">Actions</th>
               </tr>
             </thead>
