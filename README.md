@@ -28,28 +28,33 @@ c.JupyterHub.template_paths = JH_ADMIN_TEMPLATE_PATHS
 c.JupyterHub.extra_handlers = jhadmin_extra_handlers
 ```
 
-### React UI Views:
+## React UI Views:
 
-##### Server Dashboard Page  
+### Server Dashboard Page:  
 Main dashboard component allowing an admin to start/stop the hub's servers as well as perform user moderation.  
+
 ![serverdashboard](https://github.com/MetroStar/jh-admin-dashboard/blob/master/documentation/screenshots/Dashboard-Home.png?raw=true)
 
-##### Add User Page:  
+### Add User Page:  
 React view for adding users and selecting their privilege level.  
+
 ![addusers](https://github.com/MetroStar/jh-admin-dashboard/blob/master/documentation/screenshots/AddUsers.png?raw=true)
 
 
-##### Edit User Page:
+### Edit User Page:
 React view for delegating or revoking admin privilege as well as updating user names.  
+
 ![edituser](https://github.com/MetroStar/jh-admin-dashboard/blob/master/documentation/screenshots/EditUser.png?raw=true)
 
 
-##### Group List Page:
+### Group List Page:
 React view for listing available groups of users.  
+
 ![grouplist](https://github.com/MetroStar/jh-admin-dashboard/blob/master/documentation/screenshots/GroupList.png?raw=true)
 
 
-##### Group Edit Page:
+### Group Edit Page:
 React view for adding or removing users from a group.  
+
 ![GroupEdit](https://github.com/MetroStar/jh-admin-dashboard/blob/master/documentation/screenshots/GroupEdit.png?raw=true)
 
