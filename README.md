@@ -24,8 +24,8 @@ First, `cp react-fe` then:
 ```python
 from jhadmin.app import JH_ADMIN_TEMPLATE_PATHS
 from jhadmin.hubextension import jhadmin_extra_handlers
-c.JupyterHub.template_paths = JH_ADMIN_TEMPLATE_PATHS
-c.JupyterHub.extra_handlers = jhadmin_extra_handlers
+c.JupyterHub.template_paths.extend(JH_ADMIN_TEMPLATE_PATHS)
+c.JupyterHub.extra_handlers.extend(jhadmin_extra_handlers)
 ```
 
 ## React UI Views:
